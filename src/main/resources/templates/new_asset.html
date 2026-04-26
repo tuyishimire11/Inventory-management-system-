@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Asset - Inventory System</title>
+    <style>
+       
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: greenyellow;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"], select {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add New Asset</h2>
+
+    <form th:action="@{/asset/save}" method="post" th:object="${asset}">
+        
+        <input type="text" th:field="*{deviceType}" placeholder="Device Type (e.g. Laptop)" required>
+        
+        <input type="text" th:field="*{serialNumber}" placeholder="Serial Number" required>
+        
+        <input type="text" th:field="*{modelSpecifications}" placeholder="Model Specifications">
+        
+        <input type="text" th:field="*{ownerName}" placeholder="Owner Name">
+        
+        <input type="text" th:field="*{department}" placeholder="Department">
+        
+        <input type="text" th:field="*{condition}" placeholder="Condition (e.g. New, Used, Faulty)">
+
+        <select th:field="*{status}">
+            <option value="AVAILABLE">Available</option>
+            <option value="ASSIGNED">Assigned</option>
+            <option value="UNDER_REPAIR">Under Repair</option>
+            <option value="RETIRED">Retired</option>
+        </select>
+
+        <button type="submit">Save Asset</button>
+    </form>
+
+    <a href="/assets" class="back-link">← Cancel and Go Back</a>
+</div>
+
+</body>
+</html>

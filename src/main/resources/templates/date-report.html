@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Date Range Report</title>
+    <style>
+        body { font-family: Arial; background: #f4f7f6; padding: 40px; }
+        .container { background: white; max-width: 1000px; margin: auto; padding: 30px; border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #3498db; color: white; }
+        .form-group { margin-bottom: 15px; }
+        input, button { padding: 8px; margin-right: 10px; }
+        .nav { margin-top: 20px; text-align: center; }
+        .nav a { margin: 0 10px; text-decoration: none; background: #3498db; color: white; padding: 8px 15px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Report by Issue Date</h2>
+    <form method="get" action="/reports/date">
+        <label>From: <input type="date" name="startDate" th:value="${startDate}"></label>
+        <label>To: <input type="date" name="endDate" th:value="${endDate}"></label>
+        <button type="submit">Filter</button>
+        <a href="/reports/date" style="background:#95a5a6; color:white; padding:8px 12px; text-decoration:none;">Reset</a>
+    </form>
+
+    <h3>Assets Issued Between <span th:text="${startDate ?: 'from beginning'}"></span> and <span th:text="${endDate ?: 'today'}"></span></h3>
+    <table>
+        <thead>
+            <tr><th>ID</th><th>Device</th><th>Serial</th><th>Owner</th><th>Department</th><th>Issue Date</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            <tr th:each="a : ${dateFilteredAssets}">
+                <td th:text="${a.id}"></td>
+                <td th:text="${a.deviceType}"></td>
+                <td th:text="${a.serialNumber}"></td>
+                <td th:text="${a.ownerName != null ? a.ownerName : '—'}"></td>
+                <td th:text="${a.department != null ? a.department : '—'}"></td>
+                <td th:text="${a.issueDate}"></td>
+                <td th:text="${a.status}"></td>
+            </tr>
+            <tr th:if="${dateFilteredAssets.isEmpty()}">
+                <td colspan="7">No assets issued in this date range.</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="nav">
+        <a href="/reports">Back to Reports</a>
+        <a href="/assets">Assets</a>
+    </div>
+</div>
+</body>
+</html>

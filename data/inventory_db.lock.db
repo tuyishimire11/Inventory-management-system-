@@ -1,0 +1,6 @@
+#FileLock
+#Fri Apr 24 15:30:25 SAST 2026
+hostName=Consessa
+id=19dbfaf3c1cddecec648124d49b3d4bb85b2648e013
+method=file
+server=192.168.43.100\:61000

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Asset</title>
+    <style>
+        body { font-family: Arial; background: #f4f7f6; padding: 40px; }
+        .container { background: white; max-width: 500px; margin: auto; padding: 30px; border-radius: 12px; }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; }
+        button { background: #f39c12; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Issue Asset #<span th:text="${asset.id}"></span></h2>
+    <p><strong>Device:</strong> <span th:text="${asset.deviceType}"></span> - <span th:text="${asset.serialNumber}"></span></p>
+    <form th:action="@{/asset/issue/{id}(id=${asset.id})}" method="post">
+        <input type="text" name="ownerName" placeholder="Employee Name" required>
+        <input type="text" name="department" placeholder="Department" required>
+        <button type="submit">Confirm Issue</button>
+    </form>
+    <a href="/assets" style="display:block; text-align:center;">Cancel</a>
+</div>
+</body>
+</html>

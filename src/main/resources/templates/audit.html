@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Audit Log</title>
+    <style>
+        body { font-family: Arial; background: #f4f7f6; padding: 40px; }
+        .container { background: white; max-width: 1200px; margin: auto; padding: 30px; border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #2c3e50; color: white; }
+        .nav { margin-top: 20px; text-align: center; }
+        .nav a { background: #3498db; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Audit History</h1>
+    <table>
+        <thead>
+            <tr><th>Timestamp</th><th>Action</th><th>Asset ID</th><th>Details</th><th>Performed By</th></tr>
+        </thead>
+        <tbody>
+            <tr th:each="log : ${logs}">
+                <td th:text="${log.timestamp}"></td>
+                <td th:text="${log.action}"></td>
+                <td th:text="${log.assetId}"></td>
+                <td th:text="${log.details}"></td>
+                <td th:text="${log.performedBy}"></td>
+            </tr>
+            <tr th:if="${logs.isEmpty()}">
+                <td colspan="5">No audit records found.</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="nav">
+        <a href="/assets">Back to Assets</a>
+        <a href="/reports">Reports</a>
+    </div>
+</div>
+</body>
+</html>

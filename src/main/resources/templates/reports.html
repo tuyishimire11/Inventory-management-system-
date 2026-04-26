@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Reports</title>
+    <style>
+        body { font-family: Arial; background: #f4f7f6; padding: 40px; }
+        .container { background: white; max-width: 1000px; margin: auto; padding: 30px; border-radius: 12px; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #3498db; color: white; }
+        .nav { margin-top: 20px; text-align: center; }
+        .nav a { margin: 0 10px; text-decoration: none; background: #3498db; color: white; padding: 8px 15px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Inventory Reports</h1>
+    <p><strong>Total Assets:</strong> <span th:text="${totalAssets}"></span></p>
+
+    <h2>By Department</h2>
+    <table>
+        <tr><th>Department</th><th>Count</th></tr>
+        <tr th:each="entry : ${byDepartment}">
+            <td th:text="${entry.key}"></td><td th:text="${entry.value}"></td>
+        </tr>
+    </table>
+
+     <h2>By Device Type</h2>
+    <table>
+        <thead>
+            <tr><th>Device Type</th><th>Count</th></tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${byDeviceType}">
+                <td th:text="${entry.key}">—</td>
+                <td th:text="${entry.value}">0</td>
+            </tr>
+            <tr th:if="${byDeviceType.isEmpty()}">
+                <td colspan="2">No data available.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>By Condition</h2>
+    <table>
+        <tr><th>Condition</th><th>Count</th></tr>
+        <tr th:each="entry : ${byCondition}">
+            <td th:text="${entry.key}"></td><td th:text="${entry.value}"></td>
+        </tr>
+    </table>
+
+    <h2>By Status</h2>
+    <table>
+        <tr><th>Status</th><th>Count</th></tr>
+        <tr th:each="entry : ${byStatus}">
+            <td th:text="${entry.key}"></td><td th:text="${entry.value}"></td>
+        </tr>
+    </table>
+
+    <h2>Active Assignments (Issued & Not Returned)</h2>
+    <table>
+        <tr><th>Asset ID</th><th>Device</th><th>Owner</th><th>Issue Date</th></tr>
+        <tr th:each="asset : ${activeAssignments}">
+            <td th:text="${asset.id}"></td>
+            <td th:text="${asset.deviceType} + ' - ' + ${asset.serialNumber}"></td>
+            <td th:text="${asset.ownerName}"></td>
+            <td th:text="${asset.issueDate}"></td>
+        </tr>
+    </table>
+
+    <div class="nav">
+        <a href="/assets">Back to Assets</a>
+        <a href="/reports/date">Report by Issue Date</a>
+        <a href="/audit">View Audit Log</a>
+    </div>
+</div>
+</body>
+</html>

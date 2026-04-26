@@ -1,0 +1,138 @@
+# Inventory Management System for End User Equipment
+
+## Challenge Solution | Spring Boot MVC | Fully Offline Windows Application
+
+---
+
+## 📌 Overview
+
+This system addresses Airtel's challenge of lacking a centralized system to track end-user devices (laptops, desktops, mobile phones). It provides a **fully offline, Windows‑based** desktop application with a local database, ensuring accurate asset tracking, accountability, and comprehensive reporting even without internet connectivity.
+
+---
+
+## ✨ Features (Complete Scope)
+
+| Requirement | Implementation |
+|-------------|----------------|
+| Asset registration (device details, specifications) | ✅ Add new asset form |
+| Assignment & ownership tracking | ✅ Issue asset to employee (name + department) |
+| Condition monitoring | ✅ New / Good / Faulty |
+| Issue and return management | ✅ Issue date, return date, automatic status update |
+| Comprehensive reporting | ✅ By department, device type, condition, status, date range |
+| Search & filtering | ✅ By device type, department, condition, status |
+| Audit history | ✅ Every create, update, issue, return, delete is logged |
+| Fully offline | ✅ H2 file‑based database (no external server) |
+| Windows executable | ✅ Run as JAR with `.bat` launcher |
+
+---
+
+## 🛠️ Technology Stack
+
+- **Backend:** Spring Boot 2.7.18
+- **Frontend:** Thymeleaf + HTML/CSS
+- **Database:** H2 (file‑based, embedded)
+- **Security:** Spring Security (in‑memory authentication)
+- **Build Tool:** Maven
+- **Java Version:** 17
+
+---
+
+## 🔐 Default Login Credentials/SYSAdmin
+
+| Field | Value |
+|-------|-------|
+| Username | `24RP09087` |
+| Password | `24RP04278` |
+
+---
+
+## 🚀 How to Run the Application
+
+### Prerequisites
+- Java 17 installed
+- Maven (optional, you can use the Maven Wrapper)
+
+### Steps
+
+1. **Clone or download** the project.
+2. Open a terminal in the project root folder.
+3. Build and run:
+   ```bash
+   mvn clean spring-boot:run
+
+4.Open your browser and go to: http://localhost:8080
+
+5.Click Login, enter the credentials above.
+
+6.Start managing your inventory.
+
+Packaging as a Windows Desktop App
+
+bash:
+mvn clean package
+Then create a run.bat file in the target folder:
+
+batch:
+@echo off
+start javaw -jar inventory-management-0.0.1-SNAPSHOT.jar
+timeout /t 3
+start http://localhost:8080
+Double‑click run.bat to launch the application like a native Windows app.
+
+📂 Database Location
+
+ims.sql is in project folder
+
+No manual database setup is required – tables are created automatically.
+
+To reset the system, delete this file and restart the app.
+
+🧪 Testing the Features
+1.After logging in, you can:
+
+2.Add Asset → Fill device type, serial number, specs, condition, status.
+
+3.View All Assets → Table with all assets, search/filter options.
+
+4.Issue Asset → Assign to an employee (sets owner, department, issue date, status = ASSIGNED).
+
+5.Return Asset → Sets return date, status back to AVAILABLE.
+
+6.Reports → See statistics by department, device type, condition, status, active assignments.
+
+7.Date Range Report → Filter assets issued between two dates.
+
+8.Audit Log → View complete history of all asset movements.
+
+9.Logout → Ends session, redirects to landing page.
+
+📝 Assignment Compliance
+
+This project fully satisfies the Digital and Social Transformation cluster challenge provided by Airtel:
+
+✅ Centralised offline inventory tracking
+
+✅ Asset registration with specifications
+
+✅ Assignment and ownership tracking
+
+✅ Condition monitoring
+
+✅ Issue / return processes
+
+✅ Reporting by date, department, device type, status
+
+✅ Search, filtering, audit history
+
+✅ Windows‑based desktop GUI (via browser but packaged as JAR + BAT)
+
+👨‍💻 Authors
+
+C2 GROUP MEMBERS:
+
+1.TUYISHIMIRE Fabrigas | 24RP04278
+2.NYIRABIZIMANA Consessa | 24RP09087
+
+
+
+   
